@@ -26,7 +26,7 @@ const TimeFrameTodo = state => {
 const TimeFrame = state => {
   return appendAll(
     divOf("timeframe"),
-    divOf("timestamp", null, ts => ts.text(state.time)),
+    divOf("timestamp", null, ts => ts.text(`${state.time}:00`)),
     TimeFrameTodo(state),
     TimeFrameSave(state)
   );

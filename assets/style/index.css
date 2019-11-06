@@ -21,6 +21,12 @@ div.timeframe {
   display: flex;
 }
 
+@media only screen and (min-width: 600px) {
+  div.timeframe {
+    height: 70px;
+  }
+}
+
 div.timeframe > .timestamp {
   width: 15%;
   border-top: 1px solid grey;
@@ -33,6 +39,7 @@ div.timeframe > .timestamp {
 textarea.timeframe-todo {
   width: 70%;
   float: left;
+  padding: 0.5em 1em;
   border: none;
   resize: none;
   border-top: 1px solid white;
