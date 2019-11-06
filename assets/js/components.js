@@ -39,12 +39,13 @@ const TimeFrameList = () => {
 
 // Body
 
-const Run = () => {
-  show(TimeFrameList);
+const Content = () => {
+  const contentBody = divOf().append(TimeFrameList());
   setInterval(() => {
     console.log("updating");
-    show(TimeFrameList);
-  }, hour / 4);
+    contentBody.empty().append(TimeFrameList());
+  }, hour / updatePerHour);
+  return contentBody;
 };
 
-Run();
+show(Content);
