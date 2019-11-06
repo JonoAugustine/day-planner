@@ -2,3 +2,60 @@ html,
 body {
   height: 100vh;
 }
+
+div.timeframe-list {
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 600px) {
+  div.timeframe-list {
+    width: 70%;
+  }
+}
+
+div.timeframe {
+  width: 100%;
+  height: 50px;
+  display: flex;
+}
+
+div.timeframe > .timestamp {
+  width: 15%;
+  border-top: 1px solid grey;
+  padding-right: 0.5em;
+  float: left;
+  text-align: right;
+  font-size: 0.9em;
+}
+
+textarea.timeframe-todo {
+  width: 70%;
+  float: left;
+  border: none;
+  resize: none;
+  border-top: 1px solid white;
+  color: #dbdbdb;
+  background-color: grey;
+}
+
+.timeframe > button.timeframe-save {
+  width: 15%;
+  padding: 1em 0;
+  border: none;
+  border-top: 1px solid white;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  text-align: center;
+  color: black;
+  background-color: aqua;
+}
+
+.timeframe > button.timeframe-save:hover {
+  background-color: aquamarine;
+}
+
+.timeframe > button.timeframe-save:active {
+  background-color: #87c2ef;
+}

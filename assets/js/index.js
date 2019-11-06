@@ -1,17 +1,25 @@
 const root = $("#root");
 
+const elementOf = (tag, className, style, callback) => {
+  const e = $(`<${tag}>`).addClass(className);
+  if (style) e.css(style);
+  if (callback) callback(e);
+  return e;
+};
+
 /**
- * Creates a JQuery element and applies the given style.
+ * Creates a JQuery div element and applies the given style.
  * @param {string} tag
  * @param {*} style
  * @param {function} callback
  * @returns the created element.
  */
-const elOf = (tag, style, callback, ...children) => {
-  const e = $(`<${tag}>`).css(style);
-  if (callback) callback(e);
-  if (children) children.forEach(c => e.append(c));
-  return e;
+const divOf = (className, style, callback) =>
+  elementOf("div", className, style, callback);
+
+const appendAll = (parent, ...children) => {
+  children.forEach(c => parent.append(c));
+  return parent;
 };
 
 /**
@@ -29,7 +37,24 @@ const show = component => {
   root.append(component());
 };
 
-const TimeFrameState = time => ({
-  time: time,
-  saved: false
-});
+// Save Data & State
+
+const timeRange = { min: 9, max: 17 };
+
+const loadStates = () => {
+  let states = [];
+  for (let i = timeRange.min; i <= timeRange.max; i++) {
+    states.push(
+      localStorage[i] ? JSON.parse(localStorage[i]) : { time: i, text: "" }
+    );
+  }
+  return states;
+};
+
+/**
+ * Save a TimeFrame state objet to local storage.
+ * @param {*} state
+ */
+const save = state => {
+  localStorage[state.time] = JSON.stringify(state);
+};

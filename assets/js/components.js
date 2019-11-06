@@ -1,73 +1,40 @@
-const TodoArea = state => {
-  return elOf(
-    "input",
-    {
-      width: "100%",
-      height: "100%",
-      float: "left",
-      "background-color": "green"
-    },
-    input => {
-      input.attr("value", state ? state.text : "");
-      input.attr("type", "textArea");
-    }
+const TimeFrameSave = state => {
+  return elementOf("button", "timeframe-save", null, btn =>
+    btn.text(/* TODO Change to floppydisk*/ "save").click(() => save(state))
   );
 };
 
-const SaveButton = (state, todo) => {
-  return elOf(
-    "div",
+const TimeFrameTodo = state => {
+  const past = state.time < moment().hours();
+  const now = state.time ==  moment().hours();
+  const yet = !(past || now);
+  return elementOf(
+    "textarea",
+    "timeframe-todo",
     {
-      width: "10%",
-      height: "100%",
-      float: "left",
-      "background-color": "aqua"
+      color: now ? "black" : "white",
+      "background-color": yet ? "green" : past ? "grey" : "red"
     },
-    div => {
-      // TODO save functionality
-    }
+    textarea =>
+      textarea
+        .text(state.text)
+        .change(e => (state.text = e.target.value))
+        .attr("disabled", past ? "true" : false)
   );
 };
 
-const TimeFrame = (time, state) => {
-  const todo = TodoArea(state);
-  const save = SaveButton(state, todo);
-  return elOf(
-    "div",
-    {
-      height: "50px",
-      width: "100%",
-      display: "flex",
-      "border-top": "1px solid"
-    },
-    null,
-    elOf(
-      "div",
-      {
-        width: "10%",
-        float: "left",
-        "text-align": "right"
-      },
-      div => {
-        div.text("time");
-      }
-    ),
-    todo,
-    save
+const TimeFrame = state => {
+  return appendAll(
+    divOf("timeframe"),
+    divOf("timestamp", null, ts => ts.text(state.time)),
+    TimeFrameTodo(state),
+    TimeFrameSave(state)
   );
 };
 
-const TimeFrameSection = () => {
-  return elOf(
-    "div",
-    {
-      height: "100%",
-      width: "70%",
-      margin: "0 auto"
-    },
-    () => {},
-    TimeFrame()
-  );
+const TimeFrameList = () => {
+  const states = loadStates();
+  return appendAll(divOf("timeframe-list"), ...states.map(s => TimeFrame(s)));
 };
 
-show(TimeFrameSection);
+show(TimeFrameList);
