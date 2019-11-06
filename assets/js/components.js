@@ -6,7 +6,7 @@ const TimeFrameSave = state => {
 
 const TimeFrameTodo = state => {
   const past = state.time < moment().hours();
-  const now = state.time ==  moment().hours();
+  const now = state.time == moment().hours();
   const yet = !(past || now);
   return elementOf(
     "textarea",
@@ -37,4 +37,14 @@ const TimeFrameList = () => {
   return appendAll(divOf("timeframe-list"), ...states.map(s => TimeFrame(s)));
 };
 
-show(TimeFrameList);
+// Body
+
+const Run = () => {
+  show(TimeFrameList);
+  setInterval(() => {
+    console.log("updating");
+    show(TimeFrameList);
+  }, hour / 4);
+};
+
+Run();

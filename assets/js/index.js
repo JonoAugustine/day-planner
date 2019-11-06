@@ -39,6 +39,7 @@ const show = component => {
 
 // Save Data & State
 
+const hour = 1000 * 60 * 60;
 const timeRange = { min: 9, max: 17 };
 
 const loadStates = () => {
