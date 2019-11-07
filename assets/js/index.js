@@ -32,10 +32,7 @@ const clear = component => (component ? component : root).empty();
  * Clears root and display's component
  * @param {function} component
  */
-const show = component => {
-  root.empty();
-  root.append(component());
-};
+const show = component => clear().append(component());
 
 // Save Data & State
 

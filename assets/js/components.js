@@ -37,12 +37,15 @@ const TimeFrameList = () => {
   return appendAll(divOf("timeframe-list"), ...states.map(s => TimeFrame(s)));
 };
 
-// Body
-
 const Content = () => {
   const contentBody = divOf().append(TimeFrameList());
+  $("#date").text(moment().format("ddd D/M/YY"));
+  $("#time").text(moment().format("HH:mm:ss"));
   setInterval(() => {
-    console.log("updating");
+    $("#time").text(moment().format("HH:mm:ss"));
+  }, 1000);
+  setInterval(() => {
+    $("#date").text(moment().format("ddd D/M/YY"));
     contentBody.empty().append(TimeFrameList());
   }, hour / updatePerHour);
   return contentBody;
