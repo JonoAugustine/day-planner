@@ -16,10 +16,7 @@ const TimeFrameTodo = state => {
       "background-color": yet ? "green" : past ? "grey" : "red"
     },
     textarea =>
-      textarea
-        .text(state.text)
-        .change(e => (state.text = e.target.value))
-        .attr("disabled", past ? "true" : false)
+      textarea.text(state.text).change(e => (state.text = e.target.value))
   );
 };
 
